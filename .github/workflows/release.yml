@@ -1,40 +1,35 @@
-name: Release
+name: Release Obsidian plugin
 
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm ci
+          node-version: "18.x"
 
       - name: Build plugin
-        run: npm run build
+        run: |
+          npm install
+          npm run build
 
-      - name: Get version
-        id: version
-        uses: dawidd6/action-get-tag@v1
-        with:
-          strip_v: true
-
-      - name: Create zip file
-        run: zip -r markdown-copy-helper-${{ steps.version.outputs.tag }}.zip main.js manifest.json styles.css README.md LICENSE
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: markdown-copy-helper-${{ steps.version.outputs.tag }}.zip
+      - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+
+          gh release create "$tag" \
+            --title="$tag" \
+            --draft \
+            main.js manifest.json styles.css
