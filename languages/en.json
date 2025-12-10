@@ -1,0 +1,25 @@
+{
+	"commands": {
+		"copy-markdown-content": {
+			"name": "Copy Markdown Content (Ignore YAML)"
+		},
+		"copy-markdown-content-with-images": {
+			"name": "Copy Markdown Content with Images as Base64 (Ignore YAML)"
+		}
+	},
+	"ribbon": {
+			"copy-tooltip": "Copy Markdown Content",
+			"copy-images-tooltip": "Copy Markdown Content with Images as Base64"
+		},
+	"editor-menu": {
+			"copy": "Copy Content (Ignore YAML)",
+			"copy-images": "Copy Content and Convert Images to Base64"
+	},
+	"notices": {
+			"no-file-open": "Please open a markdown file first",
+			"cannot-get-file": "Cannot get current file",
+			"copy-success": "Copied Markdown Content",
+			"copy-success-with-images": "Copied Markdown Content with Base64 Images",
+			"copy-failed": "Copy failed"
+	}
+}

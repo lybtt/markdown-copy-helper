@@ -1,0 +1,25 @@
+{
+	"commands": {
+		"copy-markdown-content": {
+			"name": "複製 Markdown 內容（忽略 YAML）"
+		},
+		"copy-markdown-content-with-images": {
+			"name": "複製 Markdown 內容並轉圖片為 base64（忽略 YAML）"
+		}
+	},
+	"ribbon": {
+			"copy-tooltip": "複製 Markdown 內容",
+			"copy-images-tooltip": "複製 Markdown 內容並轉圖片為 base64"
+		},
+	"editor-menu": {
+			"copy": "複製內容（忽略 YAML）",
+			"copy-images": "複製內容並轉圖片為 base64"
+		},
+	"notices": {
+			"no-file-open": "請先開啟一個 Markdown 檔案",
+			"cannot-get-file": "無法取得目前檔案",
+			"copy-success": "已複製 Markdown 內容",
+			"copy-success-with-images": "已複製 Markdown 內容（含 base64 圖片）",
+			"copy-failed": "複製失敗"
+	}
+}

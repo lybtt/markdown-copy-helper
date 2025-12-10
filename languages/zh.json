@@ -1,0 +1,25 @@
+{
+	"commands": {
+		"copy-markdown-content": {
+			"name": "复制 Markdown 正文（忽略 YAML）"
+		},
+		"copy-markdown-content-with-images": {
+			"name": "复制 Markdown 正文并转图片为 base64（忽略 YAML）"
+		}
+	},
+	"ribbon": {
+			"copy-tooltip": "复制 Markdown 正文",
+			"copy-images-tooltip": "复制 Markdown 正文并转图片为 base64"
+		},
+	"editor-menu": {
+			"copy": "复制正文（忽略 YAML）",
+			"copy-images": "复制正文并转图片为 base64"
+		},
+	"notices": {
+			"no-file-open": "请先打开一个 Markdown 文件",
+			"cannot-get-file": "无法获取当前文件",
+			"copy-success": "已复制 Markdown 正文",
+			"copy-success-with-images": "已复制 Markdown 正文（含 base64 图片）",
+			"copy-failed": "复制失败"
+	}
+}

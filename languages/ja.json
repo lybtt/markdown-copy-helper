@@ -1,0 +1,25 @@
+{
+	"commands": {
+		"copy-markdown-content": {
+			"name": "Markdownコンテンツをコピー（YAMLを無視）"
+		},
+		"copy-markdown-content-with-images": {
+			"name": "画像をbase64に変換してMarkdownコンテンツをコピー（YAMLを無視）"
+		}
+	},
+	"ribbon": {
+			"copy-tooltip": "Markdownコンテンツをコピー",
+			"copy-images-tooltip": "画像をbase64に変換してMarkdownコンテンツをコピー"
+		},
+	"editor-menu": {
+			"copy": "コンテンツをコピー（YAMLを無視）",
+			"copy-images": "コンテンツをコピーして画像をbase64に変換"
+		},
+	"notices": {
+			"no-file-open": "最初にMarkdownファイルを開いてください",
+			"cannot-get-file": "現在のファイルを取得できません",
+			"copy-success": "Markdownコンテンツをコピーしました",
+			"copy-success-with-images": "Markdownコンテンツをbase64画像付きでコピーしました",
+			"copy-failed": "コピーに失敗しました"
+	}
+}
