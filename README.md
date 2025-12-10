@@ -22,6 +22,11 @@
   2. 相对于当前文件的路径
   3. 仓库根目录
 
+## 🌍 Language
+
+- [中文文档](README.md)
+- [English Documentation](README_EN.md)
+
 ## 使用方法
 
 ### 方法一：使用 Ribbon 按钮
