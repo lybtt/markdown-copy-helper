@@ -184,12 +184,12 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 
 		// 添加复制 Markdown 正文的图标
 		this.addRibbonIcon('copy', i18n.t('ribbon.copy-tooltip'), (evt: MouseEvent) => {
-			this.copyMarkdownContent(false);
+			void this.copyMarkdownContent(false);
 		});
 
 		// 添加复制 Markdown 正文并转换图片的图标
 		this.addRibbonIcon('image', i18n.t('ribbon.copy-images-tooltip'), (evt: MouseEvent) => {
-			this.copyMarkdownContent(true);
+			void this.copyMarkdownContent(true);
 		});
 
 		// 添加命令
@@ -197,7 +197,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 			id: 'copy-markdown-content',
 			name: i18n.t('commands.copy-markdown-content.name'),
 			callback: () => {
-				this.copyMarkdownContent(false);
+				void this.copyMarkdownContent(false);
 			}
 		});
 
@@ -205,7 +205,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 			id: 'copy-markdown-content-with-images',
 			name: i18n.t('commands.copy-markdown-content-with-images.name'),
 			callback: () => {
-				this.copyMarkdownContent(true);
+				void this.copyMarkdownContent(true);
 			}
 		});
 
@@ -216,7 +216,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 					item.setTitle(i18n.t('editor-menu.copy'))
 						.setIcon('copy')
 						.onClick(() => {
-							this.copyMarkdownContent(false);
+							void this.copyMarkdownContent(false);
 						});
 				});
 
@@ -224,7 +224,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 					item.setTitle(i18n.t('editor-menu.copy-images'))
 						.setIcon('image')
 						.onClick(() => {
-							this.copyMarkdownContent(true);
+							void this.copyMarkdownContent(true);
 						});
 				});
 			})
