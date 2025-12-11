@@ -250,7 +250,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 	/**
 	 * 获取 Obsidian 配置的附件文件夹路径
 	 */
-	private async getAttachmentFolderPath(): Promise<string | null> {
+	private getAttachmentFolderPath(): string | null {
 		// 先尝试从运行时配置获取
 		try {
 			// @ts-ignore - app.vault.config 是内部 API
@@ -262,7 +262,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 					return attachmentPath;
 				}
 			}
-		} catch (error) {
+		} catch {
 			// 忽略错误
 		}
 
@@ -272,7 +272,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 	/**
 	 * 解析图片路径，处理相对路径和 Obsidian 配置的附件路径
 	 */
-	private async resolveImagePath(imagePath: string, currentFilePath: string): Promise<string> {
+	private resolveImagePath(imagePath: string, currentFilePath: string): string {
 		// 如果已经是绝对路径，直接返回
 		if (imagePath.startsWith('/')) {
 			return imagePath.substring(1); // 移除开头的斜杠
@@ -292,7 +292,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 		processedPath = processedPath.replace(/\$\{folder\}/g, currentFolderName);
 
 		// 尝试在附件文件夹中查找
-		const attachmentFolder = await this.getAttachmentFolderPath();
+		const attachmentFolder = this.getAttachmentFolderPath();
 		if (attachmentFolder) {
 			// 处理附件文件夹中的图片
 			let attachmentPath: string;
@@ -360,7 +360,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 	private async convertImageToBase64(imagePath: string, currentFilePath: string): Promise<string> {
 		try {
 			// 解析图片路径
-			const resolvedPath = await this.resolveImagePath(imagePath, currentFilePath);
+			const resolvedPath = this.resolveImagePath(imagePath, currentFilePath);
 
 			const file = this.app.vault.getAbstractFileByPath(resolvedPath);
 			if (file instanceof TFile) {
@@ -376,7 +376,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 				// 如果找不到图片，返回 [wu] 标记
 				return '[wu]';
 			}
-		} catch (error) {
+		} catch {
 			// 如果转换失败，返回 [wu] 标记
 			return '[wu]';
 		}
@@ -549,7 +549,7 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 			const message = convertImages ? i18n.t('notices.copy-success-with-images') : i18n.t('notices.copy-success');
 			new Notice(message);
 
-		} catch (error) {
+		} catch {
 			new Notice(i18n.t('notices.copy-failed'));
 		}
 	}
