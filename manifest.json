@@ -1,7 +1,7 @@
 {
   "id": "markdown-copy-helper",
   "name": "Markdown Copy Helper",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "minAppVersion": "0.13.21",
   "description": "Copy markdown content with automatic base64 image conversion. Supports ![[wikilink]] format, ignores YAML front matter, and seamlessly integrates with attachment folder settings.",
   "author": "lybtt",
