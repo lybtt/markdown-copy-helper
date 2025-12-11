@@ -1,6 +1,6 @@
 {
   "name": "markdown-copy-helper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Obsidian plugin to copy markdown content",
   "main": "main.js",
   "scripts": {
