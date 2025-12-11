@@ -1,5 +1,4 @@
-import { App, Editor, MarkdownView, Plugin, Notice, TFile } from 'obsidian';
-import { Copy, Image as ImageIcon } from 'lucide';
+import { MarkdownView, Plugin, Notice, TFile, App } from 'obsidian';
 
 // 多语言支持
 interface Translation {
@@ -118,14 +117,16 @@ const translations: Record<string, Translation> = {
 
 class I18n {
 	private locale: string = 'en';
+	private app: App;
 
-	constructor() {
+	constructor(app: App) {
+		this.app = app;
 		this.detectLocale();
 	}
 
 	private detectLocale() {
 		// 尝试获取系统语言
-		const lang = localStorage.getItem('language') || navigator.language || 'en';
+		const lang = this.app.loadLocalStorage('language') || navigator.language || 'en';
 
 		// 映射语言代码
 		const langMap: Record<string, string> = {
@@ -146,17 +147,22 @@ class I18n {
 		const translation = translations[this.locale] || translations['en'];
 
 		const keys = key.split('.');
-		let value: any = translation;
+		let value: unknown = translation;
 
 		for (const k of keys) {
-			value = value?.[k];
+			if (typeof value === 'object' && value !== null && k in value) {
+				value = (value as Record<string, unknown>)[k];
+			} else {
+				value = undefined;
+				break;
+			}
 		}
 
-		return value || fallback || key;
+		return (typeof value === 'string' ? value : fallback) || key;
 	}
 }
 
-const i18n = new I18n();
+let i18n: I18n;
 
 // No settings needed for this plugin
 // interface MarkdownCopyHelperSettings {
@@ -170,7 +176,10 @@ const i18n = new I18n();
 export default class MarkdownCopyHelperPlugin extends Plugin {
 	// settings: MarkdownCopyHelperSettings;
 
-	async onload() {
+	onload() {
+		// 初始化i18n
+		i18n = new I18n(this.app);
+
 		// await this.loadSettings();
 
 		// 添加复制 Markdown 正文的图标
@@ -444,6 +453,8 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 					const replacement = `![${alt}](${base64Path}${title})`;
 					replacements.push({ index, length: fullMatch.length, value: replacement });
 				}
+			}).catch(() => {
+				// 忽略错误，convertImageToBase64已经处理了错误情况
 			});
 
 			promises.push(promise);
@@ -484,6 +495,8 @@ export default class MarkdownCopyHelperPlugin extends Plugin {
 					const replacement = `![${altText}](${base64Path})`;
 					replacements.push({ index, length: fullMatch.length, value: replacement });
 				}
+			}).catch(() => {
+				// 忽略错误，convertImageToBase64已经处理了错误情况
 			});
 
 			promises.push(promise);
